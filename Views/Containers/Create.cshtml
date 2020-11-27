@@ -1,0 +1,85 @@
+﻿@model MvcContainer.Models.Container
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Container</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClientId" class="control-label"></label>
+                <select asp-for="ClientId" class="form-control" asp-items="ViewBag.ClientId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nmr_control" class="control-label"></label>
+                <input asp-for="Nmr_control" onkeypress="return verifyNum(event)" minlength="11" class="form-control" />
+                <span asp-validation-for="Nmr_control" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoContainerId" class="control-label"></label>
+                <select asp-for="TipoContainerId" class="form-control" asp-items="ViewBag.TipoContainerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusContainerId" class="control-label"></label>
+                <select asp-for="StatusContainerId" class="form-control" asp-items="ViewBag.StatusContainerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoriaContainerId" class="control-label"></label>
+                <select asp-for="CategoriaContainerId" class="form-control" asp-items="ViewBag.CategoriaContainerId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+
+    var container = document.getElementById('Nmr_control');
+
+    function verifyNum(evt) {
+        console.log(container.value.length)
+        var charCode = (evt.which) ? evt.which : event.keyCode
+
+        if (container.value.length < 4) {
+            console.log(evt)
+
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+                return true;
+
+            }
+
+            return false;
+
+        } else if (container.value.length >= 4 && container.value.length < 11) {
+
+
+            if (charCode >= 48 && charCode <= 57)
+
+                return true;;
+
+
+            return false
+
+        } else {
+
+            return false;
+        }
+
+
+    };
+
+</script>
+
